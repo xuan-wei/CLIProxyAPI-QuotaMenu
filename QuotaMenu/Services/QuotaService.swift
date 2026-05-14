@@ -76,9 +76,10 @@ actor QuotaFetcher {
         var req = URLRequest(url: url, timeoutInterval: 15)
         req.setValue("Bearer \(key)", forHTTPHeaderField: "Authorization")
         do {
-            let (data, _) = try await URLSession.shared.data(for: req)
-            let resp = try JSONDecoder().decode(AuthFilesResponse.self, from: data)
-            return resp.files ?? []
+            let (data, resp) = try await URLSession.shared.data(for: req)
+            guard let http = resp as? HTTPURLResponse, (200..<300).contains(http.statusCode) else { return [] }
+            let decoded = try JSONDecoder().decode(AuthFilesResponse.self, from: data)
+            return decoded.files ?? []
         } catch { return [] }
     }
 
@@ -111,8 +112,17 @@ actor QuotaFetcher {
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.httpBody = try JSONSerialization.data(withJSONObject: payload)
 
-        let (respData, _) = try await URLSession.shared.data(for: req)
-        return try JSONDecoder().decode(APICallResponse.self, from: respData)
+        let (respData, resp) = try await URLSession.shared.data(for: req)
+        guard let http = resp as? HTTPURLResponse else {
+            throw QuotaError.badResponse
+        }
+        if http.statusCode == 401 { throw QuotaError.unauthorized }
+        do {
+            return try JSONDecoder().decode(APICallResponse.self, from: respData)
+        } catch {
+            let text = String(data: respData, encoding: .utf8) ?? ""
+            throw QuotaError.decodeFailed(text)
+        }
     }
 
     // MARK: - Dispatch
@@ -670,4 +680,18 @@ struct AnyCodable: Codable {
     }
 }
 
-enum QuotaError: Error { case noURL }
+enum QuotaError: Error, LocalizedError {
+    case noURL
+    case badResponse
+    case unauthorized
+    case decodeFailed(String)
+
+    var errorDescription: String? {
+        switch self {
+        case .noURL: "Invalid URL"
+        case .badResponse: "Bad response"
+        case .unauthorized: "Unauthorized"
+        case .decodeFailed(let text): "Decode failed: \(text.prefix(200))"
+        }
+    }
+}
