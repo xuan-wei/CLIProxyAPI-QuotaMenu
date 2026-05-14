@@ -28,7 +28,11 @@ If you're running CLIProxyAPI to manage multiple AI coding assistant accounts, c
 ## Setup
 
 1. Download the latest release or build from source
-2. Launch QuotaMenu — a gauge icon appears in your menu bar
+2. Remove the quarantine attribute (macOS blocks unsigned apps):
+   ```bash
+   xattr -cr /path/to/QuotaMenu.app
+   ```
+3. Launch QuotaMenu — a gauge icon appears in your menu bar
 3. Right-click the icon → **Settings** → **Sites** tab → **Add Site**
 4. Enter your CLIProxyAPI URL and management key
 5. Left-click the icon to open the quota panel
