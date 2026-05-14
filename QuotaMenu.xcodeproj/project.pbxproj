@@ -1,0 +1,401 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		34776CF806E700A973FB0D65 /* SettingsWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7398EBB3FA0D5EB05B2626E /* SettingsWindowManager.swift */; };
+		367AA037EC0B351F2CF92F9D /* QuotaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9513E3E4E2E39E7F3AA24D4C /* QuotaViewModel.swift */; };
+		525789119ADDE56258E6FEC5 /* PanelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7D81113854F71B1E0EF92F /* PanelManager.swift */; };
+		5850258CDFA6354574003964 /* QuotaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3CBD36F3C16EB7C4C9FB7A /* QuotaService.swift */; };
+		5973CDC11C5F48E3357E6B13 /* QuotaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D19B821E5B97041D46AAEC0 /* QuotaData.swift */; };
+		5A9E097006764B528D25D307 /* QuotaMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F580F5B0A898A3331FB8E /* QuotaMenuView.swift */; };
+		664B483472C816BDECEF10E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58EBEC28E0F420766F032ACF /* Assets.xcassets */; };
+		67B373BECC668BE6ECB1E055 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6EB863A0F9B23F1D06C43B /* KeychainHelper.swift */; };
+		759465FC1EA61C7B668DD55F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3784E6B51C1686E494C40F32 /* SettingsView.swift */; };
+		9B968B1ABF2D09FD216276EA /* QuotaRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E276F49F483B9CFB81E6DF /* QuotaRowView.swift */; };
+		BE1C1E3FBA0A2B19CEB49460 /* QuotaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2768A4F74B6CD3D145DEB9F /* QuotaListView.swift */; };
+		CC0235E642D05E9F970806F1 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66619F2F4C792BFC9876AA70 /* NotificationService.swift */; };
+		D1C7722ABE083D5548067FBA /* QuotaMenuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A381453B8BA8F1E58080C9 /* QuotaMenuApp.swift */; };
+		F6AD7FC8EBB42154191B9C02 /* Site.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6229B5F04EE3C7021539D /* Site.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		10D6229B5F04EE3C7021539D /* Site.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Site.swift; sourceTree = "<group>"; };
+		3784E6B51C1686E494C40F32 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		37E276F49F483B9CFB81E6DF /* QuotaRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotaRowView.swift; sourceTree = "<group>"; };
+		58AB57A5998B0B5A9B6893F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		58EBEC28E0F420766F032ACF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5D19B821E5B97041D46AAEC0 /* QuotaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotaData.swift; sourceTree = "<group>"; };
+		66619F2F4C792BFC9876AA70 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		6E6EB863A0F9B23F1D06C43B /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		7088D1AE2F5291E6E3963534 /* QuotaMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuotaMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C4F580F5B0A898A3331FB8E /* QuotaMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotaMenuView.swift; sourceTree = "<group>"; };
+		8E7D81113854F71B1E0EF92F /* PanelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelManager.swift; sourceTree = "<group>"; };
+		92E7B457EDCF12D1AB521286 /* QuotaMenu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuotaMenu.entitlements; sourceTree = "<group>"; };
+		9513E3E4E2E39E7F3AA24D4C /* QuotaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotaViewModel.swift; sourceTree = "<group>"; };
+		98A381453B8BA8F1E58080C9 /* QuotaMenuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotaMenuApp.swift; sourceTree = "<group>"; };
+		AE3CBD36F3C16EB7C4C9FB7A /* QuotaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotaService.swift; sourceTree = "<group>"; };
+		B2768A4F74B6CD3D145DEB9F /* QuotaListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotaListView.swift; sourceTree = "<group>"; };
+		F7398EBB3FA0D5EB05B2626E /* SettingsWindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		037B00CDEDCF68E1998E7034 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				66619F2F4C792BFC9876AA70 /* NotificationService.swift */,
+				AE3CBD36F3C16EB7C4C9FB7A /* QuotaService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		0CA231FB891971715D3D4FDD = {
+			isa = PBXGroup;
+			children = (
+				BFECAFF262ECAB726B448B9A /* QuotaMenu */,
+				846FFDC0F5DD629DD3A83175 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4EE46A6D7481BAE62577D0F7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B2768A4F74B6CD3D145DEB9F /* QuotaListView.swift */,
+				8C4F580F5B0A898A3331FB8E /* QuotaMenuView.swift */,
+				37E276F49F483B9CFB81E6DF /* QuotaRowView.swift */,
+				3784E6B51C1686E494C40F32 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		846FFDC0F5DD629DD3A83175 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7088D1AE2F5291E6E3963534 /* QuotaMenu.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		92A696A4FFE7C97D61E41B7F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5D19B821E5B97041D46AAEC0 /* QuotaData.swift */,
+				10D6229B5F04EE3C7021539D /* Site.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BFECAFF262ECAB726B448B9A /* QuotaMenu */ = {
+			isa = PBXGroup;
+			children = (
+				58EBEC28E0F420766F032ACF /* Assets.xcassets */,
+				58AB57A5998B0B5A9B6893F5 /* Info.plist */,
+				92E7B457EDCF12D1AB521286 /* QuotaMenu.entitlements */,
+				98A381453B8BA8F1E58080C9 /* QuotaMenuApp.swift */,
+				92A696A4FFE7C97D61E41B7F /* Models */,
+				037B00CDEDCF68E1998E7034 /* Services */,
+				FE4848494C3F1C1396A24E66 /* Utilities */,
+				F38CB7ECE8B91DF34B7E42B0 /* ViewModels */,
+				4EE46A6D7481BAE62577D0F7 /* Views */,
+			);
+			path = QuotaMenu;
+			sourceTree = "<group>";
+		};
+		F38CB7ECE8B91DF34B7E42B0 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9513E3E4E2E39E7F3AA24D4C /* QuotaViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FE4848494C3F1C1396A24E66 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				6E6EB863A0F9B23F1D06C43B /* KeychainHelper.swift */,
+				8E7D81113854F71B1E0EF92F /* PanelManager.swift */,
+				F7398EBB3FA0D5EB05B2626E /* SettingsWindowManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		24F9AE976F5BEDDC16A64117 /* QuotaMenu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A2346783A1BE203164DE7D7 /* Build configuration list for PBXNativeTarget "QuotaMenu" */;
+			buildPhases = (
+				B4D0B2DB838191E7CD01E9BB /* Sources */,
+				E315E64286B527E88F1E5462 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuotaMenu;
+			packageProductDependencies = (
+			);
+			productName = QuotaMenu;
+			productReference = 7088D1AE2F5291E6E3963534 /* QuotaMenu.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		12E767D6EEC92CFF567336D9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					24F9AE976F5BEDDC16A64117 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 44AB679D2AD893505CBB00BC /* Build configuration list for PBXProject "QuotaMenu" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 0CA231FB891971715D3D4FDD;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 846FFDC0F5DD629DD3A83175 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				24F9AE976F5BEDDC16A64117 /* QuotaMenu */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E315E64286B527E88F1E5462 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				664B483472C816BDECEF10E5 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B4D0B2DB838191E7CD01E9BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67B373BECC668BE6ECB1E055 /* KeychainHelper.swift in Sources */,
+				CC0235E642D05E9F970806F1 /* NotificationService.swift in Sources */,
+				525789119ADDE56258E6FEC5 /* PanelManager.swift in Sources */,
+				5973CDC11C5F48E3357E6B13 /* QuotaData.swift in Sources */,
+				BE1C1E3FBA0A2B19CEB49460 /* QuotaListView.swift in Sources */,
+				D1C7722ABE083D5548067FBA /* QuotaMenuApp.swift in Sources */,
+				5A9E097006764B528D25D307 /* QuotaMenuView.swift in Sources */,
+				9B968B1ABF2D09FD216276EA /* QuotaRowView.swift in Sources */,
+				5850258CDFA6354574003964 /* QuotaService.swift in Sources */,
+				367AA037EC0B351F2CF92F9D /* QuotaViewModel.swift in Sources */,
+				759465FC1EA61C7B668DD55F /* SettingsView.swift in Sources */,
+				34776CF806E700A973FB0D65 /* SettingsWindowManager.swift in Sources */,
+				F6AD7FC8EBB42154191B9C02 /* Site.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		59938764CAF2376104708219 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QuotaMenu/QuotaMenu.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = QuotaMenu/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.quotamenu.app;
+				PRODUCT_NAME = QuotaMenu;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A43E70CB8E5A42380218E906 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		ECF5DA7A8B9710F75DAB0A18 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		EDCD60AF55016CC22474DFF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QuotaMenu/QuotaMenu.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = QuotaMenu/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.quotamenu.app;
+				PRODUCT_NAME = QuotaMenu;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1A2346783A1BE203164DE7D7 /* Build configuration list for PBXNativeTarget "QuotaMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDCD60AF55016CC22474DFF8 /* Debug */,
+				59938764CAF2376104708219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		44AB679D2AD893505CBB00BC /* Build configuration list for PBXProject "QuotaMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECF5DA7A8B9710F75DAB0A18 /* Debug */,
+				A43E70CB8E5A42380218E906 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 12E767D6EEC92CFF567336D9 /* Project object */;
+}
