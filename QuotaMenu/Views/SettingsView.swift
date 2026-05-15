@@ -193,6 +193,29 @@ struct GeneralSettingsView: View {
                     .foregroundStyle(.secondary)
             }
 
+            Divider()
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text("About").font(.headline)
+
+                HStack {
+                    Text("Developer"); Spacer()
+                    Text("Xuan Wei").foregroundStyle(.secondary)
+                }
+                HStack {
+                    Text("GitHub"); Spacer()
+                    Link("xuan-wei/CLIProxyAPI-QuotaMenu", destination: URL(string: "https://github.com/xuan-wei/CLIProxyAPI-QuotaMenu")!)
+                        .font(.system(size: 12))
+                }
+                HStack {
+                    Text("License"); Spacer()
+                    Text("MIT").foregroundStyle(.secondary)
+                }
+                Text("A native macOS menu bar app for monitoring API quota usage across multiple AI providers.")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            }
+
             Spacer()
 
             Button("Quit QuotaMenu") { NSApplication.shared.terminate(nil) }

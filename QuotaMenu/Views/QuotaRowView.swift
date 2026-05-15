@@ -9,51 +9,52 @@ struct QuotaRowView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack {
+            HStack(spacing: 6) {
                 Text(item.displayAccount)
                     .font(.system(size: 13, weight: .medium))
                     .lineLimit(1)
 
-                Spacer()
-
                 if let plan = item.plan, !plan.isEmpty {
                     Text(plan)
-                        .font(.system(size: 10, weight: .semibold))
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(item.providerColor.opacity(0.8))
-                        .foregroundStyle(item.providerTextColor)
-                        .clipShape(RoundedRectangle(cornerRadius: 4))
+                        .font(.system(size: 9, weight: .bold))
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 1)
+                        .background(item.providerColor.opacity(0.15))
+                        .foregroundStyle(item.providerColor)
+                        .clipShape(RoundedRectangle(cornerRadius: 3))
                 }
-            }
 
-            HStack {
-                Text(timeAgo(item.fetchedAt))
-                    .font(.system(size: 10))
-                    .foregroundStyle(.tertiary)
-
-                Spacer()
-
-                Button {
-                    onToggleHidden?()
-                } label: {
-                    Image(systemName: isHidden ? "eye.slash" : "eye")
-                        .font(.system(size: 10))
-                        .foregroundStyle(.secondary)
-                }
-                .buttonStyle(.plain)
+                Spacer(minLength: 4)
 
                 Button {
                     isRefreshing = true
                     onRefresh?()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) { isRefreshing = false }
                 } label: {
-                    Text("Refresh")
+                    Image(systemName: isRefreshing ? "arrow.trianglehead.2.counterclockwise" : "arrow.trianglehead.2.counterclockwise")
                         .font(.system(size: 10))
-                        .foregroundStyle(isRefreshing ? .green : .secondary)
+                        .foregroundStyle(isRefreshing ? Color.green : Color.secondary)
+                        .rotationEffect(isRefreshing ? .degrees(360) : .zero)
+                        .animation(isRefreshing ? .linear(duration: 1).repeatForever(autoreverses: false) : .default, value: isRefreshing)
                 }
                 .buttonStyle(.plain)
                 .disabled(isRefreshing)
+
+                Button {
+                    onToggleHidden?()
+                } label: {
+                    Image(systemName: isHidden ? "eye.slash" : "eye")
+                        .font(.system(size: 10))
+                        .foregroundStyle(.tertiary)
+                }
+                .buttonStyle(.plain)
+            }
+
+            HStack {
+                Text(timeAgo(item.fetchedAt))
+                    .font(.system(size: 10))
+                    .foregroundStyle(.tertiary)
+                Spacer()
             }
             .padding(.bottom, 8)
 

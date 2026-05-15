@@ -63,12 +63,14 @@ struct QuotaListView: View {
                         Text(allHidden ? "Show All" : "Hide All")
                     }
                 } label: {
-                    Image(systemName: "ellipsis.circle")
-                        .font(.caption)
+                    Image(systemName: "ellipsis")
+                        .font(.system(size: 10))
                         .foregroundStyle(.secondary)
+                        .frame(width: 16, height: 16)
                 }
                 .menuStyle(.borderlessButton)
-                .frame(width: 20)
+                .menuIndicator(.hidden)
+                .frame(width: 16)
             }
             .padding(.horizontal, 4)
 
