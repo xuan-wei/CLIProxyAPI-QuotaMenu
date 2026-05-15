@@ -174,6 +174,7 @@ struct NotificationSettingsView: View {
 
 struct GeneralSettingsView: View {
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
+    @ObservedObject private var updateChecker = UpdateChecker.shared
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -191,6 +192,29 @@ struct GeneralSettingsView: View {
                 Text("Version"); Spacer()
                 Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0")
                     .foregroundStyle(.secondary)
+                Button {
+                    updateChecker.checkNow()
+                } label: {
+                    if updateChecker.isChecking {
+                        ProgressView().scaleEffect(0.5).frame(width: 14, height: 14)
+                    } else {
+                        Text("检查更新").font(.caption)
+                    }
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .disabled(updateChecker.isChecking)
+            }
+
+            if updateChecker.hasUpdate, let ver = updateChecker.latestVersion {
+                HStack {
+                    Image(systemName: "gift.fill").foregroundStyle(.orange).font(.caption)
+                    Text("新版本 \(ver) 可用").font(.caption).foregroundStyle(.orange)
+                    Spacer()
+                    if let url = updateChecker.releaseURL {
+                        Link("前往下载", destination: url).font(.caption)
+                    }
+                }
             }
 
             Divider()

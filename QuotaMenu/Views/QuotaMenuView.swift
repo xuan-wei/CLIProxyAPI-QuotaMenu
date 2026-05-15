@@ -3,11 +3,17 @@ import SwiftUI
 struct QuotaMenuView: View {
     @EnvironmentObject var viewModel: QuotaViewModel
     @EnvironmentObject var store: SiteStore
+    @ObservedObject private var updateChecker = UpdateChecker.shared
     @State private var initialLoaded = false
 
     var body: some View {
         VStack(spacing: 0) {
             header
+
+            if updateChecker.hasUpdate {
+                updateBanner
+            }
+
             Divider()
 
             if store.sites.isEmpty {
@@ -129,5 +135,46 @@ struct QuotaMenuView: View {
         let m = diff / 60
         if m < 60 { return "\(m)m ago" }
         return "\(m / 60)h ago"
+    }
+
+    private var updateBanner: some View {
+        HStack(spacing: 0) {
+            Button {
+                if let url = updateChecker.releaseURL { NSWorkspace.shared.open(url) }
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: "arrow.up.circle.fill")
+                        .font(.system(size: 12))
+                    Text("新版本 \(updateChecker.latestVersion ?? "") 可用")
+                        .font(.system(size: 11, weight: .medium))
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 9, weight: .semibold))
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .foregroundStyle(.white)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                updateChecker.skipCurrentVersion()
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 9, weight: .bold))
+                    .foregroundStyle(.white.opacity(0.8))
+                    .frame(width: 28, height: 28)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .help("该版本不再提醒")
+            .padding(.trailing, 4)
+        }
+        .background(
+            LinearGradient(colors: [.orange, Color(red: 1.0, green: 0.55, blue: 0.0)],
+                           startPoint: .leading, endPoint: .trailing)
+        )
+        .buttonStyle(.plain)
     }
 }

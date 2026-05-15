@@ -20,6 +20,7 @@
 		BE1C1E3FBA0A2B19CEB49460 /* QuotaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2768A4F74B6CD3D145DEB9F /* QuotaListView.swift */; };
 		CC0235E642D05E9F970806F1 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66619F2F4C792BFC9876AA70 /* NotificationService.swift */; };
 		D1C7722ABE083D5548067FBA /* QuotaMenuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A381453B8BA8F1E58080C9 /* QuotaMenuApp.swift */; };
+		E8D619CD9669163770CD99EA /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E1FC8443DA3071C71CB989 /* UpdateChecker.swift */; };
 		F6AD7FC8EBB42154191B9C02 /* Site.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6229B5F04EE3C7021539D /* Site.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		58AB57A5998B0B5A9B6893F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		58EBEC28E0F420766F032ACF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D19B821E5B97041D46AAEC0 /* QuotaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotaData.swift; sourceTree = "<group>"; };
+		61E1FC8443DA3071C71CB989 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		66619F2F4C792BFC9876AA70 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		6E6EB863A0F9B23F1D06C43B /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		7088D1AE2F5291E6E3963534 /* QuotaMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuotaMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +51,7 @@
 			children = (
 				66619F2F4C792BFC9876AA70 /* NotificationService.swift */,
 				AE3CBD36F3C16EB7C4C9FB7A /* QuotaService.swift */,
+				61E1FC8443DA3071C71CB989 /* UpdateChecker.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				759465FC1EA61C7B668DD55F /* SettingsView.swift in Sources */,
 				34776CF806E700A973FB0D65 /* SettingsWindowManager.swift in Sources */,
 				F6AD7FC8EBB42154191B9C02 /* Site.swift in Sources */,
+				E8D619CD9669163770CD99EA /* UpdateChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
