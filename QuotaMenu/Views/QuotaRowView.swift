@@ -14,16 +14,6 @@ struct QuotaRowView: View {
                     .font(.system(size: 13, weight: .medium))
                     .lineLimit(1)
 
-                if let plan = item.plan, !plan.isEmpty {
-                    Text(plan)
-                        .font(.system(size: 9, weight: .bold))
-                        .padding(.horizontal, 5)
-                        .padding(.vertical, 1)
-                        .background(item.providerColor.opacity(0.15))
-                        .foregroundStyle(item.providerColor)
-                        .clipShape(RoundedRectangle(cornerRadius: 3))
-                }
-
                 Spacer(minLength: 4)
 
                 Button {
@@ -31,7 +21,7 @@ struct QuotaRowView: View {
                     onRefresh?()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) { isRefreshing = false }
                 } label: {
-                    Image(systemName: isRefreshing ? "arrow.trianglehead.2.counterclockwise" : "arrow.trianglehead.2.counterclockwise")
+                    Image(systemName: "arrow.trianglehead.2.counterclockwise")
                         .font(.system(size: 10))
                         .foregroundStyle(isRefreshing ? Color.green : Color.secondary)
                         .rotationEffect(isRefreshing ? .degrees(360) : .zero)
@@ -50,7 +40,20 @@ struct QuotaRowView: View {
                 .buttonStyle(.plain)
             }
 
-            HStack {
+            HStack(spacing: 0) {
+                if let plan = item.plan, !plan.isEmpty {
+                    Text("套餐")
+                        .font(.system(size: 10))
+                        .foregroundStyle(.secondary)
+                        .padding(.trailing, 6)
+                    Text(plan)
+                        .font(.system(size: 10, weight: .semibold))
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 2)
+                        .background(Color.secondary.opacity(0.12))
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .padding(.trailing, 8)
+                }
                 Text(timeAgo(item.fetchedAt))
                     .font(.system(size: 10))
                     .foregroundStyle(.tertiary)

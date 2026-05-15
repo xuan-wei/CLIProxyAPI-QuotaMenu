@@ -289,8 +289,22 @@ actor QuotaFetcher {
         }
 
         return QuotaItem(id: "codex:\(file.accountName)", provider: "codex", account: file.accountName,
-                         name: file.name, plan: planType, status: "success", error: nil,
+                         name: file.name, plan: Self.codexPlanLabel(planType), status: "success", error: nil,
                          windows: windows, extra: nil, fetchedAt: Date())
+    }
+
+    // MARK: - Codex plan label mapping
+
+    private static func codexPlanLabel(_ raw: String?) -> String? {
+        guard let r = raw?.lowercased().trimmingCharacters(in: .whitespaces), !r.isEmpty else { return raw }
+        switch r {
+        case "pro": return "Pro 20x"
+        case "prolite", "pro-lite", "pro_lite": return "Pro 5x"
+        case "plus": return "Plus"
+        case "team": return "Team"
+        case "free": return "Free"
+        default: return raw
+        }
     }
 
     // MARK: - Antigravity
