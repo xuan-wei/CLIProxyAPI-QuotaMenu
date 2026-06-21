@@ -29,6 +29,10 @@ final class PanelManager: ObservableObject {
 
         let hostingView = NSHostingView(rootView: content())
 
+        let trackingView = TrackingContentView()
+        trackingView.autoresizingMask = [.width, .height]
+        hostingView.autoresizingMask = [.width, .height]
+
         let p = NSPanel(
             contentRect: NSRect(x: 0, y: 0, width: width, height: height),
             styleMask: [.titled, .closable, .resizable, .nonactivatingPanel],
@@ -42,11 +46,15 @@ final class PanelManager: ObservableObject {
         p.level = .floating
         p.collectionBehavior = [.canJoinAllSpaces, .transient]
         p.isMovableByWindowBackground = true
-        p.contentView = hostingView
         p.contentMinSize = NSSize(width: width, height: 300)
         p.contentMaxSize = NSSize(width: width, height: 1200)
         p.isReleasedWhenClosed = false
         p.delegate = PanelDelegate.shared
+
+        trackingView.frame = NSRect(x: 0, y: 0, width: width, height: height)
+        hostingView.frame = trackingView.bounds
+        trackingView.addSubview(hostingView)
+        p.contentView = trackingView
 
         positionPanel(p)
         p.makeKeyAndOrderFront(nil)
@@ -93,5 +101,39 @@ private class PanelDelegate: NSObject, NSWindowDelegate {
             UserDefaults.standard.set(Double(panel.frame.height), forKey: "panelHeight")
         }
         PanelManager.shared.isVisible = false
+    }
+}
+
+private class TrackingContentView: NSView {
+    private var hideWorkItem: DispatchWorkItem?
+
+    override func updateTrackingAreas() {
+        super.updateTrackingAreas()
+        for area in trackingAreas { removeTrackingArea(area) }
+        let area = NSTrackingArea(
+            rect: bounds,
+            options: [.mouseEnteredAndExited, .activeAlways, .inVisibleRect],
+            owner: self,
+            userInfo: nil
+        )
+        addTrackingArea(area)
+    }
+
+    override func mouseEntered(with event: NSEvent) {
+        hideWorkItem?.cancel()
+        hideWorkItem = nil
+    }
+
+    override func mouseExited(with event: NSEvent) {
+        hideWorkItem?.cancel()
+        let work = DispatchWorkItem { [weak self] in
+            guard let self, let window = self.window, window.isVisible else { return }
+            let mouseLocation = NSEvent.mouseLocation
+            if !window.frame.contains(mouseLocation) {
+                PanelManager.shared.hide()
+            }
+        }
+        hideWorkItem = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: work)
     }
 }
