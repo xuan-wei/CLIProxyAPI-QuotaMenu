@@ -32,3 +32,29 @@ targets:
       properties:
         com.apple.security.app-sandbox: false
         com.apple.security.network.client: true
+
+  QuotaMenuTests:
+    type: bundle.unit-test
+    platform: macOS
+    # Unhosted tests compile the real parser and its model dependencies without
+    # launching the menu-bar app or accessing a user's configured accounts.
+    sources:
+      - QuotaMenuTests
+      - QuotaMenu/Services/QuotaService.swift
+      - QuotaMenu/Models/QuotaData.swift
+      - QuotaMenu/Models/Site.swift
+      - QuotaMenu/Utilities/KeychainHelper.swift
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGN_STYLE: Manual
+
+schemes:
+  QuotaMenu:
+    build:
+      targets:
+        QuotaMenu: all
+    test:
+      targets:
+        - QuotaMenuTests

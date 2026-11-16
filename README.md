@@ -10,6 +10,7 @@ If you're running CLIProxyAPI to manage multiple AI coding assistant accounts, c
 
 - **Multi-provider support** — Claude Code, Codex, Antigravity (Cloud Code), Gemini CLI, Kimi
 - **Rich quota display** — usage percentage, progress bars, reset time countdown, plan badges (Max/Pro/prolite)
+- **Claude Fable 5 weekly quota** — supports scoped `limits[]`, prefers the active valid meter, and falls back to the legacy non-dollar `iguana_necktie` without duplicate rows. Dollar pools retain their separate `Iguana Necktie` label.
 - **Per-account refresh** — refresh individual accounts without waiting for all
 - **Hide/show accounts** — toggle visibility per account or per provider
 - **Resizable panel** — drag to adjust height, remembers your preference
@@ -53,6 +54,18 @@ xcodebuild -scheme QuotaMenu -configuration Release build
 ```
 
 The built app will be in `~/Library/Developer/Xcode/DerivedData/QuotaMenu-*/Build/Products/Release/QuotaMenu.app`.
+
+## Tests
+
+```bash
+xcodegen generate
+xcodebuild -scheme QuotaMenu -destination 'platform=macOS' test
+```
+
+The unhosted XCTest target compiles the production parser and models without
+launching the menu-bar app or contacting any configured accounts. Synthetic
+payloads cover modern Fable limits, active selection, legacy fallback,
+deduplication, dollar-pool separation, and malformed inputs.
 
 ## How It Works
 

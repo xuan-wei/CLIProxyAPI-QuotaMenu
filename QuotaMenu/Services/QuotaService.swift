@@ -1,4 +1,118 @@
 import Foundation
+import CoreFoundation
+
+/// Pure parser for Claude's usage response. It keeps legacy named windows,
+/// understands the newer scoped `limits[]` Fable meter, and deliberately does
+/// not confuse the legacy dollar credit pool with Fable.
+enum ClaudeQuotaParser {
+    private static let windowKeys: [(String, String)] = [
+        ("five_hour", "5小时窗口"), ("seven_day", "7天窗口"),
+        ("seven_day_oauth_apps", "7天 OAuth Apps"), ("seven_day_opus", "7天 Opus"),
+        ("seven_day_sonnet", "7天 Sonnet"), ("seven_day_cowork", "7天 Cowork"),
+        ("iguana_necktie", "Iguana Necktie"),
+    ]
+
+    static let fableWindowID = "seven-day-fable"
+    static let fableWindowLabel = "Fable 5 周限额"
+
+    static func parseWindows(usageBody: [String: Any], accountName: String) -> [QuotaWindow] {
+        let fableLimit = findFableLimit(in: usageBody)
+        var windows: [QuotaWindow] = []
+
+        for (key, defaultLabel) in windowKeys {
+            guard let window = usageBody[key] as? [String: Any],
+                  let utilization = number(window["utilization"]) else { continue }
+
+            let isDollarPool = key == "iguana_necktie" && isDollarDenominated(window)
+            // When modern Fable exists, the old non-dollar iguana field is the
+            // same meter. Keep a real dollar pool, but never rename it Fable.
+            if key == "iguana_necktie", !isDollarPool, fableLimit != nil { continue }
+
+            let isLegacyFable = key == "iguana_necktie" && !isDollarPool && fableLimit == nil
+            let label = isLegacyFable ? fableWindowLabel : defaultLabel
+            let id = "\(accountName):\(isLegacyFable ? fableWindowID : label)"
+            let usedPct = round(utilization)
+            let remainPct = round(max(0, min(100, 100 - usedPct)))
+            windows.append(QuotaWindow(id: id, label: label,
+                                       usedPercent: usedPct, remainingPercent: remainPct,
+                                       resetAt: formatResetTime(window["resets_at"]), detail: nil))
+        }
+
+        if let fableLimit, let percent = number(fableLimit["percent"]) {
+            let usedPct = round(percent)
+            let remainPct = round(max(0, min(100, 100 - usedPct)))
+            windows.append(QuotaWindow(id: "\(accountName):\(fableWindowID)", label: fableWindowLabel,
+                                       usedPercent: usedPct, remainingPercent: remainPct,
+                                       resetAt: formatResetTime(fableLimit["resets_at"]), detail: nil))
+        }
+
+        return windows
+    }
+
+    private static func findFableLimit(in usageBody: [String: Any]) -> [String: Any]? {
+        guard let limits = usageBody["limits"] as? [Any] else { return nil }
+        let candidates: [[String: Any]] = limits.compactMap { value in
+            guard let limit = value as? [String: Any] else { return nil }
+            let kind = (limit["kind"] as? String ?? "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            let scope = limit["scope"] as? [String: Any]
+            let model = scope?["model"] as? [String: Any]
+            let modelName = (model?["display_name"] as? String ?? "")
+                .trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            guard kind == "weekly_scoped",
+                  (modelName == "fable" || modelName == "fable 5"),
+                  number(limit["percent"], allowString: false) != nil else { return nil }
+            return limit
+        }
+
+        return candidates.first { limit in
+            guard let flag = limit["is_active"] as? NSNumber,
+                  CFGetTypeID(flag) == CFBooleanGetTypeID() else { return false }
+            return flag.boolValue
+        } ?? candidates.first
+    }
+
+    private static func isDollarDenominated(_ window: [String: Any]) -> Bool {
+        ["limit_dollars", "used_dollars", "remaining_dollars"].contains {
+            guard let value = window[$0] else { return false }
+            return !(value is NSNull)
+        }
+    }
+
+    private static func number(_ value: Any?, allowString: Bool = true) -> Double? {
+        // Foundation bridges JSON booleans to NSNumber too; don't turn true into 1%.
+        if let n = value as? NSNumber, CFGetTypeID(n) == CFBooleanGetTypeID() { return nil }
+        let result: Double?
+        if let n = value as? Double { result = n }
+        else if let n = value as? Int { result = Double(n) }
+        else if let n = value as? NSNumber { result = n.doubleValue }
+        else if allowString, let s = value as? String { result = Double(s.trimmingCharacters(in: .whitespacesAndNewlines)) }
+        else { result = nil }
+        guard let result, result.isFinite else { return nil }
+        return result
+    }
+
+    private static func round(_ value: Double) -> Double {
+        guard abs(value) <= Double.greatestFiniteMagnitude / 10 else { return value }
+        return Darwin.round(value * 10) / 10
+    }
+
+    private static func formatResetTime(_ value: Any?) -> String? {
+        guard let value else { return nil }
+        if let n = number(value), n > 0 {
+            let seconds = n < 1e12 ? n : n / 1000
+            let date = Date(timeIntervalSince1970: seconds)
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss 'UTC'"
+            formatter.timeZone = TimeZone(identifier: "UTC")
+            return formatter.string(from: date)
+        }
+        if let string = value as? String {
+            let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
+            return trimmed.isEmpty ? nil : trimmed
+        }
+        return nil
+    }
+}
 
 actor QuotaFetcher {
     private var cache: [String: QuotaItem] = [:]
@@ -168,23 +282,7 @@ actor QuotaFetcher {
             return errorResult(provider: "claude", file: file, error: "Empty usage response")
         }
 
-        let windowKeys: [(String, String)] = [
-            ("five_hour", "5小时窗口"), ("seven_day", "7天窗口"),
-            ("seven_day_oauth_apps", "7天 OAuth Apps"), ("seven_day_opus", "7天 Opus"),
-            ("seven_day_sonnet", "7天 Sonnet"), ("seven_day_cowork", "7天 Cowork"),
-            ("iguana_necktie", "Iguana Necktie"),
-        ]
-
-        var windows: [QuotaWindow] = []
-        for (wkey, label) in windowKeys {
-            guard let w = usageBody[wkey] as? [String: Any] else { continue }
-            guard let utilization = num(w["utilization"]) else { continue }
-            let usedPct = round(utilization * 10) / 10
-            let remainPct = round(max(0, min(100, 100 - usedPct)) * 10) / 10
-            let resetAt = formatResetTime(w["resets_at"])
-            windows.append(QuotaWindow(id: "\(file.accountName):\(label)", label: label,
-                                       usedPercent: usedPct, remainingPercent: remainPct, resetAt: resetAt, detail: nil))
-        }
+        let windows = ClaudeQuotaParser.parseWindows(usageBody: usageBody, accountName: file.accountName)
 
         // Plan from profile
         var plan: String?
